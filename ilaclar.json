@@ -1,0 +1,252 @@
+{
+    "Parol 500mg": {
+        "stok": true,
+        "muadil": "Arveles",
+        "adet": 10
+    },
+    "Arveles 25mg": {
+        "stok": false,
+        "muadil": "Apranax",
+        "adet": 0
+    },
+    "Augmentin 1000mg": {
+        "stok": true,
+        "muadil": "Klamer",
+        "adet": 3
+    },
+    "Coraspin 100mg": {
+        "stok": true,
+        "muadil": "Ecopirin",
+        "adet": 15
+    },
+    "Majezik 100mg": {
+        "stok": false,
+        "muadil": "Dex-Forte",
+        "adet": 10
+    },
+    "Vicks VapoRub": {
+        "stok": true,
+        "muadil": "Peditus",
+        "adet": 10
+    },
+    "Ventolin": {
+        "stok": false,
+        "muadil": "Airsalb",
+        "adet": 0
+    },
+    "Apranax Fort": {
+        "stok": true,
+        "muadil": "Naprosyn",
+        "adet": 8
+    },
+    "Dolorex 50mg": {
+        "stok": true,
+        "muadil": "Cataflam",
+        "adet": 12
+    },
+    "Glifor 1000mg": {
+        "stok": true,
+        "muadil": "Matofin",
+        "adet": 20
+    },
+    "Lansor 30mg": {
+        "stok": false,
+        "muadil": "Aprazol",
+        "adet": 0
+    },
+    "Buscopan Plus": {
+        "stok": true,
+        "muadil": "Spazmol",
+        "adet": 7
+    },
+    "Nexium 40mg": {
+        "stok": true,
+        "muadil": "Esopro",
+        "adet": 5
+    },
+    "Aprol 550mg": {
+        "stok": true,
+        "muadil": "Apranax",
+        "adet": 10
+    },
+    "Dex-Forte": {
+        "stok": false,
+        "muadil": "Arveles",
+        "adet": 0
+    },
+    "Klamer 500mg": {
+        "stok": true,
+        "muadil": "Augmentin",
+        "adet": 4
+    },
+    "Amoklavin BID": {
+        "stok": true,
+        "muadil": "Augmentin",
+        "adet": 10
+    },
+    "Panadol": {
+        "stok": true,
+        "muadil": "Parol",
+        "adet": 15
+    },
+    "Gaviscon Likit": {
+        "stok": true,
+        "muadil": "Rennie",
+        "adet": 6
+    },
+    "Rennie Tablet": {
+        "stok": true,
+        "muadil": "Talcid",
+        "adet": 9
+    },
+    "Benical Cold": {
+        "stok": false,
+        "muadil": "A-Ferin",
+        "adet": 0
+    },
+    "A-Ferin Forte": {
+        "stok": true,
+        "muadil": "Tylol Hot",
+        "adet": 11
+    },
+    "Tylol Hot": {
+        "stok": true,
+        "muadil": "A-Ferin",
+        "adet": 8
+    },
+    "Nurofen Cold": {
+        "stok": true,
+        "muadil": "Dolven",
+        "adet": 13
+    },
+    "Dolven Şurup": {
+        "stok": true,
+        "muadil": "Calpol",
+        "adet": 2
+    },
+    "Calpol 6 Plus": {
+        "stok": true,
+        "muadil": "Dolven",
+        "adet": 10
+    },
+    "Bepanthol": {
+        "stok": true,
+        "muadil": "Hametan",
+        "adet": 25
+    },
+    "Hametan Krem": {
+        "stok": true,
+        "muadil": "Bepanthol",
+        "adet": 15
+    },
+    "Fucidin Krem": {
+        "stok": true,
+        "muadil": "Terramycin",
+        "adet": 2
+    },
+    "Terramycin": {
+        "stok": true,
+        "muadil": "Fucidin",
+        "adet": 10
+    },
+    "Voltaren Emulgel": {
+        "stok": true,
+        "muadil": "Dikloron",
+        "adet": 10
+    },
+    "Dikloron Jel": {
+        "stok": true,
+        "muadil": "Voltaren",
+        "adet": 8
+    },
+    "Advante Krem": {
+        "stok": true,
+        "muadil": "Momecon",
+        "adet": 10
+    },
+    "Momecon Pomat": {
+        "stok": true,
+        "muadil": "Elocon",
+        "adet": 7
+    },
+    "Elocon Krem": {
+        "stok": true,
+        "muadil": "Momecon",
+        "adet": 12
+    },
+    "Aerius 5mg": {
+        "stok": false,
+        "muadil": "Deloday",
+        "adet": 0
+    },
+    "Deloday 5mg": {
+        "stok": true,
+        "muadil": "Aerius",
+        "adet": 10
+    },
+    "Zyrtec Tablet": {
+        "stok": true,
+        "muadil": "Allerset",
+        "adet": 15
+    },
+    "Allerset Damla": {
+        "stok": true,
+        "muadil": "Zyrtec",
+        "adet": 6
+    },
+    "Xyzal 5mg": {
+        "stok": true,
+        "muadil": "Crebros",
+        "adet": 4
+    },
+    "Crebros 5mg": {
+        "stok": true,
+        "muadil": "Xyzal",
+        "adet": 9
+    },
+    "Davit-3": {
+        "stok": true,
+        "muadil": "Devit-3",
+        "adet": 20
+    },
+    "Devit-3 Ampul": {
+        "stok": true,
+        "muadil": "Davit-3",
+        "adet": 10
+    },
+    "Euthyrox 50mcg": {
+        "stok": true,
+        "muadil": "Levotiron",
+        "adet": 11
+    },
+    "Levotiron 50mcg": {
+        "stok": false,
+        "muadil": "Euthyrox",
+        "adet": 0
+    },
+    "Saneloc 50mg": {
+        "stok": true,
+        "muadil": "Beloc",
+        "adet": 10
+    },
+    "Beloc ZOK 50mg": {
+        "stok": true,
+        "muadil": "Saneloc",
+        "adet": 8
+    },
+    "Co-Diovan": {
+        "stok": true,
+        "muadil": "Karvezea",
+        "adet": 5
+    },
+    "Lipitor 20mg": {
+        "stok": true,
+        "muadil": "Ator",
+        "adet": 10
+    },
+    "Ator 20mg": {
+        "stok": true,
+        "muadil": "Lipitor",
+        "adet": 14
+    }
+}

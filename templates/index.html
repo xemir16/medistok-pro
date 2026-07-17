@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Medistok Pro - Final</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: white; padding: 30px; border-radius: 20px; width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .search-form { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+        button { background: #3182ce; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+        .alert { padding: 15px; border-radius: 12px; margin-top: 15px; border-left: 6px solid; }
+        .success { background: #f0fff4; border-color: #38a169; color: #2f855a; }
+        .warning { background: #fffaf0; border-color: #dd6b20; color: #9c4221; }
+        .error { background: #fff5f5; border-color: #e53e3e; color: #c53030; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🏥 Medistok Pro</h1>
+        <form action="/kontrol" method="post" class="search-form">
+            <input type="text" name="ilac_adi" placeholder="İlaç adı..." required autofocus>
+            <button type="submit">Sorgula</button>
+        </form>
+        
+        {% if sonuc %}
+            {% if onerilen %}
+                <div class="alert warning">
+                    <strong>{{ sonuc }}</strong>
+                    <form action="/kontrol" method="post" style="margin-top:10px;">
+                        <input type="hidden" name="ilac_adi" value="{{ onerilen }}">
+                        <button type="submit" style="background:#dd6b20; width:100%; border:none; padding:8px; border-radius:8px; color:white; cursor:pointer;">💡 Şunu mu demek istediniz: {{ onerilen }}</button>
+                    </form>
+                </div>
+            {% else %}
+                {% set alert_class = 'error' %}
+                {% if adet|int > 0 %}
+                    {% set alert_class = 'success' %}
+                {% elif durum %}
+                    {% set alert_class = 'warning' %}
+                {% endif %}
+
+                <div class="alert {{ alert_class }}">
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>{{ sonuc }}</strong>
+                        <span>{{ adet }} Adet</span>
+                    </div>
+                    {% if muadil %} <div style="font-size:12px; margin-top:5px;">💡 <b>Muadil:</b> {{ muadil }}</div> {% endif %}
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
+                    <form action="/stok_guncelle" method="post">
+                        <input type="hidden" name="ilac_adi" value="{{ sonuc }}">
+                        <input type="number" name="yeni_adet" placeholder="Yeni adet..." required style="padding: 8px; width: 60%; border: 1px solid #ccc; border-radius: 5px;">
+                        <button type="submit" style="background:#48bb78; border:none; padding:8px 15px; border-radius:5px; color:white; cursor:pointer;">Güncelle</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
