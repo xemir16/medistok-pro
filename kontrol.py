@@ -1,16 +1,14 @@
-import json
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+from supabase import create_client
 from difflib import get_close_matches
 
 app = Flask(__name__)
-JSON_DOSYASI = 'ilaclar.json'
 
-def veriyi_oku():
-    try:
-        with open(JSON_DOSYASI, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except:
-        return {}
+# Supabase bilgilerin
+URL = "https://haaoborfpaexelqmgmkx.supabase.co"
+KEY = "sb_publishable_SFMcmpXgybgVEFBgQApyKQ_39O_Lq3i"
+
+supabase = create_client(URL, KEY)
 
 @app.route('/')
 def ana_sayfa():
@@ -18,42 +16,47 @@ def ana_sayfa():
 
 @app.route('/kontrol', methods=['POST'])
 def kontrol():
-    ilaclar = veriyi_oku()
     aranan = request.form.get('ilac_adi', '').strip()
+    if not aranan: 
+        return render_template('index.html')
     
-    if not aranan: return render_template('index.html')
+    # Supabase'ten verileri çek
+    response = supabase.table("ilaclar").select("*").execute()
+    ilaclar_listesi = response.data
     
-    # 1. Tam veya Kısmi Eşleşme
-    bulunan = next((k for k in ilaclar if aranan.lower() in k.lower()), None)
+    # İlaç nesnelerini ve isimlerini eşleştirelim ki adet bilgisini de alabilelim
+    bulunan_ilac = next((i for i in ilaclar_listesi if aranan.lower() in i.get('ilac_adi', '').lower()), None)
     
-    if bulunan:
-        b = ilaclar[bulunan]
-        return render_template('index.html', sonuc=bulunan, durum=b['stok'], muadil=b['muadil'], adet=int(b['adet']))
+    ilac_isimleri = [i.get('ilac_adi') for i in ilaclar_listesi if i.get('ilac_adi')]
     
-    # 2. Hata Toleranslı Öneri
-    yakin_esyalar = get_close_matches(aranan, ilaclar.keys(), n=1, cutoff=0.4)
+    if bulunan_ilac:
+        ilac_adi = bulunan_ilac.get('ilac_adi')
+        adet = bulunan_ilac.get('adet', 0)
+        return render_template('index.html', sonuc=ilac_adi, durum=True, adet=adet)
+    
+    # Hata Toleranslı Öneri
+    yakin_esyalar = get_close_matches(aranan, ilac_isimleri, n=1, cutoff=0.4)
     if yakin_esyalar:
-        return render_template('index.html', sonuc=f"'{aranan}' bulunamadı.", onerilen=yakin_esyalar[0])
+        onerilen_kayit = next((i for i in ilaclar_listesi if i.get('ilac_adi') == yakin_esyalar[0]), {})
+        adet = onerilen_kayit.get('adet', 0)
+        return render_template('index.html', sonuc=f"'{aranan}' bulunamadı.", onerilen=yakin_esyalar[0], adet=adet)
     
     return render_template('index.html', sonuc="Bulunamadı", durum=False, adet=0)
 
+# Stok Güncelleme Rotası
 @app.route('/stok_guncelle', methods=['POST'])
 def stok_guncelle():
-    ilaclar = veriyi_oku()
     ilac_adi = request.form.get('ilac_adi')
     yeni_adet = request.form.get('yeni_adet')
-
-    if ilac_adi in ilaclar and yeni_adet:
-        yeni_adet_int = int(yeni_adet)
-        ilaclar[ilac_adi]['adet'] = yeni_adet_int
-        # Adet 0'dan büyükse stok var (True), değilse yok (False) yap
-        ilaclar[ilac_adi]['stok'] = (yeni_adet_int > 0)
-        
-        with open(JSON_DOSYASI, 'w', encoding='utf-8') as f:
-            json.dump(ilaclar, f, ensure_ascii=False, indent=4)
+    
+    if ilac_adi and yeni_adet:
+        try:
+            # Supabase'te ilgili ilacın adet bilgisini güncelle
+            supabase.table("ilaclar").update({"adet": int(yeni_adet)}).eq("ilac_adi", ilac_adi).execute()
+        except Exception as e:
+            print(f"Stok güncellenirken hata oluştu: {e}")
             
-    # Güncelleme sonrası veriyi tekrar gönder
-    return render_template('index.html', sonuc=ilac_adi, durum=ilaclar[ilac_adi]['stok'], muadil=ilaclar[ilac_adi]['muadil'], adet=yeni_adet_int)
+    return redirect(url_for('ana_sayfa'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
