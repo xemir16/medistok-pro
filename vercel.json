@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "kontrol.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "kontrol.py"
+    }
+  ]
+}
